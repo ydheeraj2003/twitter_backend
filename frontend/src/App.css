@@ -1,0 +1,14 @@
+.butt {
+    background-color: white; /* White background */
+    color: black; /* Black text */
+    font-weight: bold; /* Bold text */
+    border: 2px solid black; /* Black border */
+    border-radius: 50px; /* Rounded shape */
+    padding: 8px 20px; /* Space inside button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, color 0.3s; /* Smooth effect */
+  }
+
+  .butt:hover{
+    background-color: black;
+  }
