@@ -9,11 +9,14 @@ import cookieParser from "cookie-parser";
 import { v2 as cloudinary } from "cloudinary";
 import bodyParser from "body-parser";
 import cors from "cors";
-//import path from "path";
+
 
 const app=express();
 dotenv.config();
-app.use(cors());
+app.use(cors({
+    origin: "https://twitter-clone-frontend-backend.netlify.app",
+    credentials: true,
+}));
 app.use(bodyParser.json()); // To parse JSON bodies
 app.use(express.static('uploads'));
 app.use(express.json({limit : "50mb"}));
@@ -28,7 +31,6 @@ cloudinary.config({
     api_secret : process.env.CLOUDINARY_API_SECRET
 })
 const PORT=process.env.PORT || 8000;
-//const __dirname = path.resolve();
 
 app.get("/", (req, res) => {
     res.send("server is ready");
@@ -37,6 +39,14 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/notifications", notificationRoutes);
+
+app.listen(PORT, () => {
+    console.log(`server is running on port ${PORT}`);
+    connectMongoDb();
+})
+
+
+
 {/*
 
 if (process.env.NODE_ENV === "production") {
@@ -55,7 +65,3 @@ if (process.env.NODE_ENV === "production") {
     
 }
 */}
-app.listen(PORT, () => {
-    console.log(`server is running on port ${PORT}`);
-    connectMongoDb();
-})
