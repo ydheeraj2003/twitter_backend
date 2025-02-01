@@ -18,7 +18,10 @@ function App() {
     queryKey: ['authUser'],
     queryFn : async() => {
       try{
-        const res=await fetch("/api/auth/me");
+        const res=await fetch("https://twitter-backend-td0a.onrender.com/api/auth/me",{
+          method: 'GET',
+          credentials: 'include', // This ensures cookies are sent
+        });
         const data=await res.json();
         if (data.error) return null;
         if (!res.ok)

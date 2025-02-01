@@ -13,7 +13,10 @@ const RightPanel = () => {
 		queryKey: ["suggestedUsers"],
 		queryFn: async () => {
 			try {
-				const res = await fetch("/api/users/suggested");
+				const res = await fetch("https://twitter-backend-td0a.onrender.com/api/users/suggested", {
+					method : "GET",
+					credentials: "include",
+				});
 				const data = await res.json();
 				if (!res.ok) throw new Error(data.error || "Failed to get suggested users");
 				return data;
@@ -27,7 +30,10 @@ const RightPanel = () => {
 		queryKey: ["followedUsers"],
 		queryFn: async () => {
 			try {
-				const res = await fetch("/api/users/following");
+				const res = await fetch("https://twitter-backend-td0a.onrender.com/api/users/following", {
+					method : "GET",
+					credentials: "include",
+				});
 				const data = await res.json();
 				if (!res.ok) throw new Error(data.error || "Failed to get followed users");
 				return data;

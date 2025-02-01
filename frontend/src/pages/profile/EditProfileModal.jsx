@@ -17,8 +17,9 @@ const EditProfileModal = ({ authUser }) => {
 	const {mutate: updateProfile, isPending: isUpdatingProfile} = useMutation({
 		mutationFn : async() => {
 			try{
-				const res=await fetch("/api/users/update", {
+				const res=await fetch("https://twitter-backend-td0a.onrender.com/api/users/update", {
 					method : "POST",
+					credentials: "include",
 					headers : {
 						"Content-Type" : "application/json"
 					},

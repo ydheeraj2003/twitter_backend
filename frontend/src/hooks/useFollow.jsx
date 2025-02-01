@@ -9,8 +9,9 @@ const useFollow = () => {
     const {mutate: follow, isPending} = useMutation({
         mutationFn : async(userId) => {
             try {
-                const res=await fetch(`/api/users/follow/${userId}`, {
-                    method : "POST"
+                const res=await fetch(`https://twitter-backend-td0a.onrender.com/api/users/follow/${userId}`, {
+                    method : "POST",
+                    credentials: "include",
                 })
                 const data=await res.json();
                 if (!res.ok) throw new Error(data.error || "something went wrong");

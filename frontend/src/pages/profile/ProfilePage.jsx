@@ -40,7 +40,10 @@ const ProfilePage = () => {
 		queryKey: ["userProfile"],
 		queryFn: async () => {
 			try {
-				const res = await fetch(`/api/users/profile/${username}`);
+				const res = await fetch(`https://twitter-backend-td0a.onrender.com/api/users/profile/${username}`, {
+					method: "GET",
+					credentials: "include",
+				});
 				const data = await res.json();
 				if (!res.ok) {
 					throw new Error(data.error || "Something went wrong");
@@ -57,8 +60,9 @@ const ProfilePage = () => {
 	const {mutateAsync: updateProfile, isPending: isUpdatingProfile} = useMutation({
 		mutationFn : async() => {
 			try{
-				const res=await fetch("/api/users/update", {
+				const res=await fetch("https://twitter-backend-td0a.onrender.com/api/users/update", {
 					method : "POST",
+					credentials: "include",
 					headers : {
 						"Content-Type" : "application/json"
 					},

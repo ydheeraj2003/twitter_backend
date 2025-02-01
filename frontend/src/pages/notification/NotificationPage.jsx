@@ -14,7 +14,10 @@ const NotificationPage = () => {
 		queryKey : ["notifications"],
 		queryFn : async() => {
 			try {
-				const res=await fetch("/api/notifications");
+				const res=await fetch("https://twitter-backend-td0a.onrender.com/api/notifications", {
+					method : "GET",
+					credentials: "include",
+				});
 				const data=await res.json();
 				if (!res.ok) throw new Error(data.error || "something went wrong");
 				return data;
@@ -28,8 +31,9 @@ const NotificationPage = () => {
 	const {mutate: deleteNotifications} = useMutation({
 		mutationFn : async() => {
 			try {
-				const res=await fetch("/api/notifications", {
+				const res=await fetch("https://twitter-backend-td0a.onrender.com/api/notifications", {
 					method: "DELETE",
+					credentials: "include",
 					headers: {
           				"Content-Type": "application/json",
         			},
@@ -55,8 +59,9 @@ const NotificationPage = () => {
 	const { mutate: deleteSingleNotification } = useMutation({
 		mutationFn: async (notificationId) => {
 			try {
-				const res = await fetch(`/api/notifications/${notificationId}`, {
+				const res = await fetch(`https://twitter-backend-td0a.onrender.com/api/notifications/${notificationId}`, {
 					method: "DELETE",
+					credentials: "include",
 					headers: {
 						"Content-Type": "application/json",
 					},

@@ -24,8 +24,9 @@ const SignUpPage = () => {
     const {mutate, isError, isPending, error} = useMutation({
         mutationFn : async ({email, username, fullname, password}) => {
             try {
-                const res= await fetch("/api/auth/signup", {
+                const res= await fetch("https://twitter-backend-td0a.onrender.com/api/auth/signup", {
                     method : "POST",
+					credentials: "include",
                     headers : {
                         "Content-Type" : "application/json"
                     },

@@ -18,8 +18,9 @@ const Post = ({ post }) => {
 	const {mutate: deletePost, isPending} = useMutation({
 		mutationFn : async() => {
 			try {
-				const res=await fetch(`/api/posts/${post._id}`, {
-					method: "DELETE"
+				const res=await fetch(`https://twitter-backend-td0a.onrender.com/api/posts/${post._id}`, {
+					method: "DELETE",
+					credentials: "include",
 				})
 				const data=await res.json();
 				if (!res.ok) throw new Error(data.error || "Failed to delete post");
@@ -40,8 +41,9 @@ const Post = ({ post }) => {
 	const {mutate : likePost, isPending: isLiking} = useMutation({
 		mutationFn : async() => {
 			try {
-				const res=await fetch(`/api/posts/like/${post._id}`, {
-					method : "POST"
+				const res=await fetch(`https://twitter-backend-td0a.onrender.com/api/posts/like/${post._id}`, {
+					method : "POST",
+					credentials: "include",
 				})
 				const data=await res.json();
 				if (!res.ok) throw new Error (data.error || "something went wrong");
@@ -71,8 +73,9 @@ const Post = ({ post }) => {
 	const {mutate: commentPost, isPending: isCommenting} = useMutation({
 		mutationFn: async() => {
 			try {
-				const res=await fetch(`/api/posts/comment/${post._id}`, {
+				const res=await fetch(`https://twitter-backend-td0a.onrender.com/api/posts/comment/${post._id}`, {
 					method : "POST",
+					credentials: "include",
 					headers : {
 						"Content-Type" : "application/json"
 					},

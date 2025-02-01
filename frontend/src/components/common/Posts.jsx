@@ -7,11 +7,11 @@ const Posts = ({feedType, username, userId}) => {
 
 	const getPostEndpoint = () => {
 		switch (feedType) {
-			case "forYou" : return "/api/posts/all";
-			case "following" : return "/api/posts/following";
-			case "posts" : return `/api/posts/user/${username}`;
-			case "likes" : return `/api/posts/likes/${userId}`;
-			default : return "/api/posts/all";
+			case "forYou" : return "https://twitter-backend-td0a.onrender.com/api/posts/all";
+			case "following" : return "https://twitter-backend-td0a.onrender.com/api/posts/following";
+			case "posts" : return `https://twitter-backend-td0a.onrender.com/api/posts/user/${username}`;
+			case "likes" : return `https://twitter-backend-td0a.onrender.com/api/posts/likes/${userId}`;
+			default : return "https://twitter-backend-td0a.onrender.com/api/posts/all";
 		}
 	}
 	const POST_ENDPOINT=getPostEndpoint();
@@ -20,7 +20,10 @@ const Posts = ({feedType, username, userId}) => {
 		queryKey : ["posts"],
 		queryFn : async() => {
 			try {
-				const res=await fetch(POST_ENDPOINT);
+				const res=await fetch(POST_ENDPOINT, {
+					method : "GET",
+					credentials: "include",
+				});
 				const data=await res.json();
 				if(!res.ok) throw new Error(data.error || "Failed to fetch posts");
 				return data;   
