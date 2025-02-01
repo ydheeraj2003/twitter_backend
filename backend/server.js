@@ -17,7 +17,7 @@ app.use(cors({
     origin: "https://twitter-clone-frontend-backend.netlify.app",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
 }));
 app.use(bodyParser.json()); // To parse JSON bodies
 app.use(express.static('uploads'));

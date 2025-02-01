@@ -8,7 +8,8 @@ export const generateTokenAndSetCookie = async(userId, res) => {
     res.cookie("jwt", token, {
         maxAge: 15*24*60*60*1000,
         httpOnly: true,
-        sameSite: "strict"
+        sameSite: "None",  // Allow cross-origin cookies
+        secure: process.env.NODE_ENV === "production"  // Ensure it's sent only over HTTPS
     })
 
 }

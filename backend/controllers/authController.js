@@ -35,9 +35,10 @@ export const signup = async(req,res) => {
             password: hashedPassword
         })
         if (newUser){
-            generateTokenAndSetCookie(newUser._id, res)
+            const token=generateTokenAndSetCookie(newUser._id, res)
             await newUser.save();
             res.status(201).json({
+                 token,
                 _id: newUser._id,
                 fullname: newUser.fullname,
                 username: newUser.username,
@@ -72,8 +73,9 @@ export const login = async(req,res) => {
         {
             return res.status(400).json({error : "invalid password"});
         }
-        generateTokenAndSetCookie(user._id, res);
+        const token=generateTokenAndSetCookie(user._id, res);
         res.status(201).json({
+            token,
             _id: user._id,
             fullname: user.fullname,
             username: user.username,
